@@ -1,0 +1,146 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "medbooks/filter/close",
+  "name": "aa833ff5a608c791cb15",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "42fd006929b9273b9f45",
+      "aeb67236a665e1285fae",
+      "f31c4e459fb48860f968",
+      "0417cad1694a3c139182",
+      "078b14928b68b56b6ae9",
+      "51d82aeb6ea5d3c2e942",
+      "8baa12aa3de90a582c0f",
+      "a7906685cb865d8cc4f1",
+      "bf4979f7f4abf89acae7",
+      "fa49027d02a56421c99a",
+      "9a785f82904643dce800",
+      "9772fe7b13d459a3b1a6",
+      "a8ac7a1318d077af983b",
+      "1823927c4557de7ebc90",
+      "03debaafc5972858a79d",
+      "35df1f24f77da3acaf56",
+      "b463de6955f5e3084853",
+      "d643c0c18989dd04395e"
+    ],
+    "suppressActiveSection": true,
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "71e785b60416348ed298",
+    "sections": {
+      "71e785b60416348ed298": {
+        "filters": {
+          "byExpr": [
+            {
+              "name": "62b3b0b7be8930c74f32",
+              "type": "Categorical",
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dim_clients",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "d"
+                                }
+                              },
+                              "Property": "Xero Name*"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'Medical Bookkeeping Professionals Pty Ltd'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "expression": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_clients"
+                    }
+                  },
+                  "Property": "Xero Name*"
+                }
+              },
+              "howCreated": 1
+            }
+          ]
+        },
+        "visualContainers": {},
+        "visualContainerGroups": {
+          "654b71add59f23959b46": {
+            "children": {
+              "b2212d7c3997918c6127": {
+                "isHidden": true
+              },
+              "37c2ff5bd8526c3687e4": {
+                "children": {
+                  "c51a4e7e0ae3a71d99ee": {
+                    "isHidden": true
+                  },
+                  "36206631eedb7e33f454": {
+                    "isHidden": true
+                  }
+                }
+              },
+              "3326e76d6d459b735461": {
+                "isHidden": true
+              },
+              "42fd006929b9273b9f45": {
+                "isHidden": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

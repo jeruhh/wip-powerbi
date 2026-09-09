@@ -1,0 +1,45 @@
+table yesterday
+	isHidden
+	lineageTag: f9803197-d135-4ebf-828a-c1faa6c132c1
+
+	column yesterday
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 418a105a-aec9-45fd-8d86-893b2f2fa462
+		summarizeBy: none
+		sourceColumn: yesterday
+
+		annotation SummarizationSetBy = Automatic
+
+	partition yesterday = m
+		mode: import
+		source =
+				let
+				    // Get current UTC time
+				    UtcNow = DateTimeZone.UtcNow(),
+				
+				    // Convert to local time using your offset
+				    LocalNow = DateTimeZone.SwitchZone(UtcNow, 8),
+				
+				    // Get local date only
+				    LocalDate = DateTime.Date(LocalNow),
+				
+				    // Yesterday date
+				    Yesterday = Date.AddDays(LocalDate, -1),
+				
+				    // Add 11:59 PM
+				    Yesterday_1159PM = #datetime(
+				        Date.Year(Yesterday),
+				        Date.Month(Yesterday),
+				        Date.Day(Yesterday),
+				        23, 59, 0
+				    )
+				in
+				    Yesterday_1159PM
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = DateTime
+

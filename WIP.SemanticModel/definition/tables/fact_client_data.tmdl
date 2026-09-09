@@ -1,0 +1,119 @@
+table fact_client_data
+	lineageTag: e008e136-7364-4e91-85b0-c114eba970c7
+
+	column 'Name of Clients (TC Reference)'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 8a95bf65-8e35-4e05-b634-83af2b327056
+		summarizeBy: none
+		sourceColumn: Name of Clients (TC Reference)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Xero Name'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 377dbdc9-c5d9-4320-8004-039aa6111ec3
+		summarizeBy: none
+		sourceColumn: Xero Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Stream'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 27987734-ceab-4b25-98bd-919e86741a17
+		summarizeBy: none
+		sourceColumn: Business Stream
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Columns
+		lineageTag: 2fe45316-0d6e-41ab-9473-b6105c722817
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column tcref_bs_id
+		dataType: string
+		displayFolder: Columns
+		lineageTag: c20daa04-fd5f-4b44-840d-da5245d94ae8
+		summarizeBy: none
+		sourceColumn: tcref_bs_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rates
+		dataType: double
+		displayFolder: Columns
+		lineageTag: 635acb51-5c80-4e15-b13c-4555c8e0dd0a
+		summarizeBy: sum
+		sourceColumn: Rates
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Forecasted Revenue'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Columns
+		lineageTag: 9fd926d7-2a49-4fb7-bf02-95574a5095cc
+		summarizeBy: sum
+		sourceColumn: Forecasted Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Standard Hours'
+		dataType: double
+		displayFolder: Columns
+		lineageTag: a9719d4f-24b7-4ac2-ab99-97ec035fac28
+		summarizeBy: sum
+		sourceColumn: Standard Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Xero Revenue'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Columns
+		lineageTag: e4d8ce94-d988-4d78-82cc-a763d5019488
+		summarizeBy: sum
+		sourceColumn: Xero Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition fact_client_data = m
+		mode: import
+		queryGroup: Fact
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SyntheticDataPath), null, true),
+				    Data = Source{[Item="fact_client_data",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    ParsedDate = Table.TransformColumns(Promoted, {
+				        {"Date", each try DateTime.From(Date.FromText(Text.From(_), [Format="M/d/yyyy", Culture="en-US"])) otherwise null}
+				    }),
+				    Typed = Table.TransformColumnTypes(ParsedDate, {
+				        {"Name of Clients (TC Reference)", type text}, {"Xero Name", type text},
+				        {"Business Stream", type text}, {"Date", type datetime}, {"tcref_bs_id", type text},
+				        {"Rates", type number}, {"Forecasted Revenue", type number},
+				        {"Standard Hours", type number}, {"Xero Revenue", type number}
+				    })
+				in
+				    Typed
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

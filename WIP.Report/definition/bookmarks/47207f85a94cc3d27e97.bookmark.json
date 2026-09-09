@@ -1,0 +1,120 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "exporting/filter/close",
+  "name": "47207f85a94cc3d27e97",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "e3bf74ae7872e7a839bb",
+      "6b9de107133bdae7710d",
+      "8fddae7923b39c3ede3c",
+      "3aa3da56247a48304b80",
+      "9a28e7bf5a028749dc6d",
+      "13346adc9e5ed118b470",
+      "6fda6a063589a8096545",
+      "8323a7080a700b6590d8",
+      "c58b808dba63500b2e06",
+      "6a368402855c7a8a27a0",
+      "a98c7ac5c90edec1be53",
+      "0551baac57dc8799025e",
+      "7dd498edc64b270290b4",
+      "18ef50868502e0035708",
+      "db5982762292152ec9db",
+      "83be82306c6532526e2d",
+      "ca2229d6608e0a7de9cb",
+      "c87777f06e7d905dd459"
+    ],
+    "suppressActiveSection": true,
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "b143e0176e4870530951",
+    "sections": {
+      "b143e0176e4870530951": {
+        "visualContainers": {},
+        "visualContainerGroups": {
+          "4079ba5f0d000592e683": {
+            "isHidden": false,
+            "children": {
+              "e3bf74ae7872e7a839bb": {
+                "isHidden": true
+              },
+              "8d24691c1841d23650a4": {
+                "isHidden": false,
+                "children": {
+                  "bf8527b72cc1758d4147": {
+                    "isHidden": true
+                  },
+                  "69b63b0e466406692711": {
+                    "isHidden": false
+                  }
+                }
+              },
+              "b748309c3a400948b10b": {
+                "isHidden": true
+              },
+              "d6cf5309844875dd1919": {
+                "isHidden": true
+              }
+            }
+          },
+          "24e858d4c84e42b9bbd0": {
+            "children": {
+              "8906b3602289cc98c0e9": {
+                "isHidden": false
+              },
+              "3b6039b103700282cde8": {
+                "isHidden": false,
+                "children": {
+                  "3cc597b14c0800caa27c": {
+                    "isHidden": true
+                  }
+                }
+              }
+            }
+          },
+          "70d2bd658b27009bb288": {
+            "children": {
+              "1d380cb046ab60b683cd": {
+                "isHidden": false,
+                "children": {
+                  "25adcb444577257c6680": {
+                    "isHidden": false
+                  },
+                  "61de2030a08d32436769": {
+                    "isHidden": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

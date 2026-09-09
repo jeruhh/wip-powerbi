@@ -1,0 +1,243 @@
+table dim_date
+	lineageTag: 22ef0775-4e63-4d5f-9e78-febd68267d75
+
+	column Date
+		formatString: Short Date
+		displayFolder: Columns
+		lineageTag: 8333b31e-81b2-49ac-94b4-acaef1c21a3b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		displayFolder: Columns
+		lineageTag: fbfb903e-63ce-41d5-b7b6-51d5f5472e84
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		displayFolder: Columns
+		lineageTag: 60137c16-3070-4f9c-9ca4-4057ae5ba176
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		displayFolder: Columns
+		lineageTag: a2f78f8c-1420-4457-8137-eee15cd8b55c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+		sortByColumn: 'Fiscal Year Month Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		displayFolder: Columns
+		lineageTag: e9ffc7c8-7823-478f-a11d-0fd045ac9160
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month-Year Sort'
+		displayFolder: Columns
+		lineageTag: c5776dfb-2472-451f-bbe8-2f2c276d1edc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month-Year Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Name'
+		displayFolder: Columns
+		lineageTag: 4209d1e3-dfdf-495f-abe9-d31ee6064bb1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Number'
+		formatString: 0
+		displayFolder: Columns
+		lineageTag: 4eb7a5ae-a0e5-44c3-9afb-1d0aa0c6e75d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		displayFolder: Columns
+		lineageTag: bdecf5b7-ff32-4c4b-817c-62cb67def755
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fiscal Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year Month Sort'
+		formatString: 0
+		displayFolder: Columns
+		lineageTag: 151662d6-fbad-4a3b-a3a3-b8427b06e2ee
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Fiscal Year Month Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Tag'
+		displayFolder: Columns
+		lineageTag: f675aa5e-fc56-4265-b923-d8f99c2cf604
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Tag]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month-Year
+		displayFolder: Columns
+		lineageTag: a24de439-cf9d-4053-8868-b2703415218e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month-Year]
+		sortByColumn: 'Month-Year Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Filter' =
+			
+			VAR StartFY = 25
+			VAR CurrentFY =
+			    YEAR(TODAY()) + IF(MONTH(TODAY()) >= 7, 1, 0) - 2000
+			    // Adjust ">=7" if your fiscal year starts in a different month
+			
+			VAR EndFY = CurrentFY + 1
+			
+			VAR RowFY =
+			    VALUE(RIGHT('dim_date'[Fiscal Year], 2))
+			
+			RETURN
+			    RowFY >= StartFY && RowFY <= EndFY
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Calculated Columns
+		lineageTag: 5d9ba88d-a8a1-447c-b9f6-4f68771ce0bf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		displayFolder: Columns
+		lineageTag: e07f889b-3e02-4a7b-9869-e3f478f094b4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Last 3 Months' = ```
+			
+			VAR TodayDate = TODAY()
+			
+			-- 1. Find the exact 1st day of the current month
+			VAR StartCurrentMonth = DATE ( YEAR ( TodayDate ), MONTH ( TodayDate ), 1 )
+			
+			-- 2. Shift back 2 months to get the strictly anchored 1st day of the 3rd month
+			VAR StartDate = EDATE ( StartCurrentMonth, -2 ) 
+			
+			-- 3. Find the last day of the current month
+			VAR EndDate = EOMONTH ( TodayDate, 0 )
+			
+			RETURN
+			    IF ( dim_date[Date] >= StartDate && dim_date[Date] <= EndDate, 1, 0 )
+			```
+		formatString: 0
+		displayFolder: Calculated Columns
+		lineageTag: d2b119fe-9e24-4cc2-911b-a3e73a6181a2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: fe9a9595-54fe-479c-9f69-184ccb514439
+
+		level 'Fiscal Year'
+			lineageTag: e1646700-325c-481e-b190-6a462f50d667
+			column: 'Fiscal Year'
+
+		level 'Month Name'
+			lineageTag: b954a3ff-1c55-4564-bcec-4fdc8ae626af
+			column: 'Month Name'
+
+		level 'Day Number'
+			lineageTag: dcc9c6bc-90dc-4e03-956c-224524be6ce7
+			column: 'Day Number'
+
+	partition dim_date = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    FILTER (
+				        CALENDARAUTO(),
+				        [Date] >= DATE(2025,1,1)
+				    ),
+				
+				    -- Standard Calendar Columns
+				    "Year", YEAR ( [Date] ),
+				    "Month Number", MONTH ( [Date] ),
+				    "Month Name", FORMAT ( [Date], "MMM" ),
+				    "Quarter", "Q" & FORMAT ( [Date], "Q" ),
+				    "Month-Year Sort", FORMAT ( [Date], "yyyyMM" ),
+				    "Day Name", FORMAT ( [Date], "dddd" ),
+				    "Day Number", DAY ( [Date] ),
+				
+				    -- Fiscal Year (July to June)
+				    "Fiscal Year",
+				        VAR FY = YEAR ( EDATE ( [Date], 6 ) )
+				        RETURN "FY" & RIGHT ( FY, 2 ),
+				
+				    -- Fiscal Month Sort (July = 1)
+				    "Fiscal Year Month Sort",
+				        VAR M = MONTH ( [Date] )
+				        RETURN IF ( M >= 7, M - 6, M + 6 ),
+				
+				    -- Month Tags
+				    "Month Tag",
+				        VAR TodayDate = TODAY ()
+				        VAR StartCurrentMonth =
+				            DATE ( YEAR ( TodayDate ), MONTH ( TodayDate ), 1 )
+				        VAR StartPreviousMonth =
+				            EDATE ( StartCurrentMonth, -1 )
+				        VAR StartRowMonth =
+				            DATE ( YEAR ( [Date] ), MONTH ( [Date] ), 1 )
+				        RETURN
+				            SWITCH (
+				                TRUE (),
+				                StartRowMonth = StartCurrentMonth, "Current Month",
+				                StartRowMonth = StartPreviousMonth, "Previous Month"
+				            ),
+				
+				    -- Display Column
+				    "Month-Year", FORMAT ( [Date], "MMM" ) & YEAR ( [Date] ),
+				
+				    -- Month-based Week (resets every month, fixed 7-day groups)
+				    "Week",
+				        VAR DayOfMonth = DAY([Date])
+				        VAR WeekNum = INT((DayOfMonth - 1) / 7) + 1
+				        RETURN "Week " & WeekNum
+				)
+
+	annotation PBI_Id = ac9da9e351b44da6bf69b60a91d21991
+

@@ -1,0 +1,1762 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "tda/filter/clear",
+  "name": "15a91473e60e915b60d1",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "f8ab48c96510367c352d",
+      "c56ee790d0986dad5a2b",
+      "78e5b53f516b6babde96",
+      "6e3fa457b3ae0976ccc8",
+      "a3cefa5f59b262508613",
+      "f59b7fad625117dbc629",
+      "cd07713f5d34ac02dc05",
+      "279a8a4e29d0e2d6013c",
+      "0d45e780e60bc60ca8d5",
+      "a9144dc29a35e4b394c2",
+      "ff1e9ade060e0a704bd9",
+      "5b989bc644ac070e4ee0",
+      "78f8ae42987e077bc057",
+      "94f3d8096c08da09b0b0",
+      "5f35728a10997cb44914",
+      "b1eff034159119c4b1ad",
+      "5f580ac7b202c3b02c68",
+      "a9b8c600761b305c92bd"
+    ],
+    "suppressActiveSection": true,
+    "suppressDisplay": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "707679c100ec988ec247",
+    "sections": {
+      "707679c100ec988ec247": {
+        "visualContainers": {
+          "c135bdd01ac508999260": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "21b4ebf088d20d65ebe5": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "34fa334409062e569306": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "64c75eb410bd1c9018d5": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "8469c7ec3a2d053977b9": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "78e5b53f516b6babde96": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6e3fa457b3ae0976ccc8": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "38bb7d39032decb99227",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Client Group"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Client Group"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a3cefa5f59b262508613": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c23e9b663d0d1941dd03",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Xero Name*"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Xero Name*"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f59b7fad625117dbc629": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1071d2f65b0db2428ce3",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "deliverableName"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "deliverableName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "cd07713f5d34ac02dc05": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a40caaf1490c3ea0b5c7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Deliverables"
+                        }
+                      },
+                      "Property": "SLA"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "cbe53780b53863102abe",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "sla"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "sla"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "279a8a4e29d0e2d6013c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "4cc62102ad0c0656c801",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "userName"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "userName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "0d45e780e60bc60ca8d5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1522675107847e10547d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Business Stream*"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Business Stream*"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a9144dc29a35e4b394c2": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f61cb67ce47ab8c9ad38",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "teamName"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "teamName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ff1e9ade060e0a704bd9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "39d162df3012c0d3ca56",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Principal*"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Principal*"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "5b989bc644ac070e4ee0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "362ac9660d6aaddf90ea",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_date",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "And": {
+                            "Left": {
+                              "Not": {
+                                "Expression": {
+                                  "Comparison": {
+                                    "ComparisonKind": 0,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "d"
+                                          }
+                                        },
+                                        "Property": "Month Tag"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "''"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "Right": {
+                              "Not": {
+                                "Expression": {
+                                  "Comparison": {
+                                    "ComparisonKind": 0,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "d"
+                                          }
+                                        },
+                                        "Property": "Month Tag"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "null"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Property": "Month Tag"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Property": "Month Tag"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "78f8ae42987e077bc057": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f5ad725b27002f7f50c4",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Property": "Date Filter"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "7d740df038e794654fbf",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_date",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "d"
+                                    }
+                                  },
+                                  "Property": "Date Filter"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "true"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Property": "Date Filter"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "a58578776219d84d0580",
+                  "type": "Categorical",
+                  "expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_date"
+                            }
+                          },
+                          "Hierarchy": "Date Hierarchy"
+                        }
+                      },
+                      "Level": "Fiscal Year"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "47c6c27650e0d53eedb8",
+                  "type": "Categorical",
+                  "expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_date"
+                            }
+                          },
+                          "Hierarchy": "Date Hierarchy"
+                        }
+                      },
+                      "Level": "Month Name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b6c3175f1728d730c6bd",
+                  "type": "Advanced",
+                  "expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_date"
+                            }
+                          },
+                          "Hierarchy": "Date Hierarchy"
+                        }
+                      },
+                      "Level": "Day Number"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_date"
+                            }
+                          },
+                          "Hierarchy": "Date Hierarchy"
+                        }
+                      },
+                      "Level": "Fiscal Year"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_date"
+                            }
+                          },
+                          "Hierarchy": "Date Hierarchy"
+                        }
+                      },
+                      "Level": "Fiscal Year"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "5f35728a10997cb44914": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "b1eff034159119c4b1ad": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "5f580ac7b202c3b02c68": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "a9b8c600761b305c92bd": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "821374ef6604d70a1441": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "b63d5ba40be3a323be1a": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "09a71491328537775e15": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6dabdd00e4d35c3d61b1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "1c754e845ba74e3ec740": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0b58b229328797845751",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9b9f5be266eca6701560",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Previous Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3b303d749502d66c06e0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current vs Previous Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8bbde644c83c1d072202",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current vs Previous Month (Billable Hrs %)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f567f29375938d777584",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Blank Column"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9abec0d1e883ca1773ec",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Std Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "02249138dd7309802493",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable vs Std Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2bb2b5952b2b3e582847",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Actual Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "83429970755496898665",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable Hrs Copy)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b52b916653ae51d00440",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Non Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Client"
+                        }
+                      },
+                      "Property": "Name of Clients (TC Reference)"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Client"
+                        }
+                      },
+                      "Property": "Name of Clients (TC Reference)"
+                    }
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "Client.Name of Clients (TC Reference)"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Dim_Client"
+                              }
+                            },
+                            "Property": "Name of Clients (TC Reference)"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": null
+                  }
+                }
+              ]
+            }
+          },
+          "f2b8f2d3140b517ac007": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "96116c3bddeede6a0855": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "8d5d5ac1060b7bda241b": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "438cc1bb30030ceb607c": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "0ccab0e30333b927229b": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "b687d6afaba961a43991": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "7fcd0e1680e0a9b852c8": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "d0911e70983269d72645": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "48383981985890449c45": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "ccfc160720db00b9b069": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "fa003626ea7cab345e94": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "55434c053071035452e5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Show Filters Header"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1ec13ea698a0e6299026",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Show Filters"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {}
+            }
+          },
+          "08e8cf7c0d1d21e8023e": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "38e9ce958b167201a3e5": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "b8c2f61236322282680d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "757f384022b5c8980780",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Productivity Rate)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b9d9a793d446e77e270d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7bf72dc44580cc47e006",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Non Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c9841487bb54273da71a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Actual Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Productivity Rate)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "81e5b2e06d8a568b80a2": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "206cdd8cd8835d050a64",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "TDA Title"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "f5d85d103ac206a5017b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "72cbf80e57a801a50140",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e5593152559c947253a4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Previous Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c1da59f68d0cc28e304e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current vs Previous Month (Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1e2276dc4c1261e03bd2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current vs Previous Month (Billable Hrs %)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f89655454700d07e14dc",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Blank Column"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1cce64edd2ae373dab56",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Std Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0f1e40fe559dddc9d841",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable vs Std Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3d62c1e0460d8294810a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Actual Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3e4ac802b489a3abbb08",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Billable Hrs Copy)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1c811cd89dc98440c835",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Current Month (Non Billable Hrs)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "20f5be3cd0da7b66bb6a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "teamName"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "751407f7ea55181b3525",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "userName"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f2035f2c89bc44a9d242",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_activities"
+                        }
+                      },
+                      "Property": "deliverableName"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0627dcc3906053a3043e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Xero Name*"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "94f205ea12e9de83ab66",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "TC Reference*"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6531ab2ead4b64657ab0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Business Stream*"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Blank Column"
+                    }
+                  }
+                },
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Blank Column"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_clients"
+                        }
+                      },
+                      "Property": "Xero Name*"
+                    }
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "dim_clients.Xero Name*"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dim_clients.TC Reference*"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dim_clients.Business Stream*"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "fact_activities.teamName"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "fact_activities.userName"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "fact_activities.deliverableName"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": null
+                  }
+                }
+              ]
+            }
+          },
+          "baf4be8c80918eb600ee": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "e4591fc581ac2e1c00c0": {
+            "isHidden": false,
+            "children": {
+              "dbca4ea02e6bbc77a311": {
+                "isHidden": false,
+                "children": {
+                  "6736d4c7d71ac609a464": {
+                    "isHidden": true
+                  },
+                  "47445547e021ac95bdea": {
+                    "isHidden": false
+                  }
+                }
+              },
+              "f8ab48c96510367c352d": {
+                "isHidden": false
+              },
+              "0259e5ada8a7870205ec": {
+                "isHidden": true
+              },
+              "02886c7a087244702117": {
+                "isHidden": true
+              },
+              "3130b4d368aa42b7a961": {
+                "isHidden": true
+              }
+            }
+          },
+          "5577dc39d0a5587bbde0": {
+            "children": {
+              "ee37cec40e3620755370": {
+                "isHidden": false
+              },
+              "279b3bc9ba5b4c359a43": {
+                "isHidden": false
+              }
+            }
+          },
+          "0804cae790475ab772aa": {
+            "children": {
+              "4a3721d52ab5019eac77": {
+                "isHidden": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

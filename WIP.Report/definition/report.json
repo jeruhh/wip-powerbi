@@ -1,0 +1,118 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY25SU12",
+      "reportVersionAtImport": {
+        "visual": "2.5.0",
+        "report": "3.1.0",
+        "page": "2.3.0"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Aretex8778455094961012.json",
+      "reportVersionAtImport": {
+        "visual": "2.6.0",
+        "report": "3.1.0",
+        "page": "2.3.0"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "visible": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY25SU12",
+          "path": "BaseThemes/CY25SU12.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "ARETEX_SECONDARY_LOGO-019083850377499749.png",
+          "path": "ARETEX_SECONDARY_LOGO-019083850377499749.png",
+          "type": "Image"
+        },
+        {
+          "name": "aretex-logo05572381543692173.png",
+          "path": "aretex-logo05572381543692173.png",
+          "type": "Image"
+        },
+        {
+          "name": "Aretex8778455094961012.json",
+          "path": "Aretex8778455094961012.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "circle-exclamation-solid-full_784958647981164.png",
+          "path": "circle-exclamation-solid-full_784958647981164.png",
+          "type": "Image"
+        },
+        {
+          "name": "circle-exclamation-solid-full12429172574118275.png",
+          "path": "circle-exclamation-solid-full12429172574118275.png",
+          "type": "Image"
+        },
+        {
+          "name": "circle-exclamation-solid-full8245308632960443.svg",
+          "path": "circle-exclamation-solid-full8245308632960443.svg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "isPersistentUserStateDisabled": true,
+    "useStylableVisualContainerHeader": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "queryLimitOption": "None",
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  }
+}

@@ -1,0 +1,23 @@
+expression RangeStart = #datetime(2026, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: b99afe42-d6d8-4747-acb1-589d9e796ab7
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = DateTime
+
+expression RangeEnd = #datetime(2030, 12, 31, 23, 59, 59) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 2af5638a-d5fd-4982-99f6-7d8a27fcf87e
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = DateTime
+
+/// Full path to Synthetic_Data.xlsx. Set this to wherever you cloned the
+/// repository before refreshing: Home > Transform data > Manage parameters.
+expression SyntheticDataPath = "C:\path\to\Synthetic_Data.xlsx" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 5c1f0a94-7d3e-4b62-9a18-0e6b2c7f8d41
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

@@ -1,0 +1,34 @@
+# Normalise line endings so TMDL/PBIR diffs stay readable across machines.
+* text=auto eol=crlf
+
+# TMDL is tab-indented and indentation is significant -- never let anything
+# rewrite whitespace in these files.
+*.tmdl      text eol=crlf whitespace=-trailing-space,-space-before-tab
+
+# PBIP / PBIR definition files
+*.pbip      text eol=crlf
+*.pbism     text eol=crlf
+*.pbir      text eol=crlf
+*.platform  text eol=crlf
+
+# Binary assets -- don't try to diff or merge these
+*.xlsx      binary
+*.xls       binary
+*.abf       binary
+*.pbix      binary
+*.pbit      binary
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.ttf       binary
+*.woff      binary
+*.woff2     binary
+
+# GitHub language stats: this is a Power BI project, not a JSON project.
+# Without this the repo reads as ~95% JSON because of the PBIR visual files.
+*.tmdl                              linguist-language=TMDL
+WIP.Report/**                       linguist-generated=true
+WIP.SemanticModel/definition/cultures/** linguist-generated=true
+docs/**                             linguist-documentation=true

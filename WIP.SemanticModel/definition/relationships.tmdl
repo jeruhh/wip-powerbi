@@ -1,0 +1,21 @@
+relationship f8951388-efab-8dd9-3ed5-642629bcb1da
+	fromColumn: fact_client_data.tcref_bs_id
+	toColumn: dim_clients.tcref_bs_id
+
+relationship 59a88f61-a1a5-938a-8432-9752f87d72c0
+	fromColumn: fact_activities.date
+	toColumn: dim_date.Date
+
+relationship 016068d5-16f6-fecd-db4e-b210c26fa02d
+	fromColumn: fact_client_data.Date
+	toColumn: dim_date.Date
+
+relationship d9290d97-8f99-6404-170d-2e6f4dcb1cc8
+	fromColumn: fact_activities.tcRef
+	toColumn: dim_clients.'TC Reference*'
+
+relationship b8db587a-f5f4-282c-5670-5c6534ba4917
+	toCardinality: many
+	fromColumn: fact_client_data.'Name of Clients (TC Reference)'
+	toColumn: fact_activities.tcRef
+

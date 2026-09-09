@@ -1,0 +1,146 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "34375ddb34830c495ca0",
+      "displayName": "Release Notes",
+      "children": [
+        "a637e916298447ac180a",
+        "5ec9ab746aba014ae466"
+      ]
+    },
+    {
+      "name": "1c2ab0e15a9a2ab3901e",
+      "displayName": "Client Overview",
+      "children": [
+        "ad13c5f618689464d22d",
+        "0ee3f7b44393299d053f",
+        "4e36aa6bab3f27726c78",
+        "d264877fc27e694b79fc",
+        "0e3cbd6f91fb28293468",
+        "8189198a0a1452abe566",
+        "92b4381102fef5d09b9e"
+      ]
+    },
+    {
+      "name": "2d43e02e7837dca655d1",
+      "displayName": "Client Overview - Navigation",
+      "children": [
+        "b472dfda5ac33604a92e",
+        "71959e35e5c991f9d389",
+        "068fcc62e62fb7a2ad2d",
+        "b4f28db5c03ab9c9c00a"
+      ]
+    },
+    {
+      "name": "ab4389b9102bdd834e8c",
+      "displayName": "Top/Bottom Clients",
+      "children": [
+        "3704f3b2b7300ba16d02",
+        "ac8301c64d5c80367917",
+        "4a15caf574ade780a081",
+        "4c6941fe2cc25831e374",
+        "98d78087b0140dea05c1",
+        "97e79c00d7c60cc35c8a",
+        "6feaa26d374394a12040"
+      ]
+    },
+    {
+      "name": "4ab99af8c60478424c36",
+      "displayName": "Top/Bottom Clients - Navigation",
+      "children": [
+        "327f3350003e42039e47",
+        "0b505577c07bd0be3c58"
+      ]
+    },
+    {
+      "name": "4a9cd9cc2da917e27090",
+      "displayName": "Time Details Analysis",
+      "children": [
+        "e856e8e0eea7b90e382b",
+        "479c7cdb73b0e9b14c26",
+        "b3646b25c7dd052e7e01",
+        "8ccf1a5e9cd75b37b3e0",
+        "6aa15976c0968d33d689",
+        "d2288cc9c16802105b4b",
+        "15a91473e60e915b60d1"
+      ]
+    },
+    {
+      "name": "4a50a9919805d6089438",
+      "displayName": "Team Performance",
+      "children": [
+        "fd00820f114a723e7944",
+        "c6aae3d005ec01d36633",
+        "e2d89baa5e15ba7b59cc",
+        "f69932a814997a919a72",
+        "4f12ac418d230a7b5d49",
+        "2d0ab168c32d1dc7bd42",
+        "88f5d170972c39102292"
+      ]
+    },
+    {
+      "name": "bb11dd0c49acea5ed06e",
+      "displayName": "Team Performance - Navigation",
+      "children": [
+        "df7af78b8e8e8286153a",
+        "29c16b4062522112db15"
+      ]
+    },
+    {
+      "name": "19f68e56820455c63a0a",
+      "displayName": "Other Reports",
+      "children": [
+        "580c4b89b90b8cce2d9c",
+        "39d23305c3ac8bc006e4",
+        "a7e44656e10b42084d62",
+        "b406d68b9e76041ad473",
+        "9c3de07e12bc50d214ad",
+        "be2a6831c402a0584ea6",
+        "ca587149980c4bb65e47"
+      ]
+    },
+    {
+      "name": "a2fb79e85a1427199091",
+      "displayName": "Other Reports - Navigation",
+      "children": [
+        "3adaf086733da8637c90",
+        "ddec260833764ec67859"
+      ]
+    },
+    {
+      "name": "76b646aca16e0628c3e8",
+      "displayName": "Exporting",
+      "children": [
+        "ae7f98a022e96a2eed2b",
+        "ebfaa342eba8aa401ed4",
+        "74ed036840bbbca0c306",
+        "8d00f618ebc3100201d0",
+        "a8b8d3d34a000071d502",
+        "47207f85a94cc3d27e97",
+        "c7b6c5a8705423b02856"
+      ]
+    },
+    {
+      "name": "2a76ea8959ee712e214d",
+      "displayName": "Exporting - Navigation",
+      "children": [
+        "52cfb19c09469c84bb32",
+        "96324176a805a9543e30"
+      ]
+    },
+    {
+      "name": "f860fa45fc3117a8c4d8",
+      "displayName": "Medbooks",
+      "children": [
+        "bca63f86552d7369c5c1",
+        "cdc1e54e42631bc712a9",
+        "c4ddfa91a6133f910690",
+        "f5bf817883fdfb610cd1",
+        "c54b7fa9fbe4c7796fa9",
+        "aa833ff5a608c791cb15",
+        "e34fdfb9ab9bdd951a4c"
+      ]
+    }
+  ]
+}

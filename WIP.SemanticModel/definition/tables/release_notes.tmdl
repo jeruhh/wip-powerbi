@@ -1,0 +1,109 @@
+table release_notes
+	lineageTag: 421d5594-02a5-49cd-a4b7-ced6e1df2581
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Columns
+		lineageTag: 6c4dc853-3402-4ab7-85a5-933babbd68e6
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Version
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 9b4dcbb7-ac47-413c-b2cd-e3e8634ff99a
+		summarizeBy: none
+		sourceColumn: Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		displayFolder: Columns
+		lineageTag: a44c2a23-0f1d-4675-b425-8014f48d49e6
+		summarizeBy: none
+		sourceColumn: Type
+		sortByColumn: TypeSort
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 85bf28b6-799f-4805-a4b4-e70d4b398c42
+		summarizeBy: none
+		sourceColumn: Description
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TypeSort
+		dataType: int64
+		formatString: 0
+		displayFolder: Columns
+		lineageTag: fba11d05-05c4-4df8-ac90-c768acc59658
+		summarizeBy: sum
+		sourceColumn: TypeSort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Display'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: fb8241fa-332f-4476-9ab5-42778834324c
+		summarizeBy: none
+		sourceColumn: Date Display
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Page
+		dataType: string
+		displayFolder: Columns
+		lineageTag: d06c6abf-d2bc-487e-a496-2579fc183c55
+		summarizeBy: none
+		sourceColumn: Page
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition release_notes = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SyntheticDataPath), null, true),
+				    Data = Source{[Item="release_notes",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    ParsedDate = Table.TransformColumns(Promoted, {
+				        {"Date", each try DateTime.From(Date.FromText(Text.From(_), [Format="MM/dd/yyyy", Culture="en-US"])) otherwise null}
+				    }),
+				    Typed = Table.TransformColumnTypes(ParsedDate, {
+				        {"Date", type datetime}, {"Version", type text}, {"Type", type text},
+				        {"Page", type text}, {"Description", type text}, {"TypeSort", Int64.Type},
+				        {"Date Display", type text}
+				    })
+				in
+				    Typed
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

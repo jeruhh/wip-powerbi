@@ -1,0 +1,32 @@
+model Model
+	culture: en-PH
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-PH
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Fact
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Dimension
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["dim_clients","release_notes","RangeStart","RangeEnd","fact_activities","fact_client_data","yesterday","SyntheticDataPath"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table _Measures
+ref table fact_activities
+ref table dim_clients
+ref table fact_client_data
+ref table dim_date
+ref table release_notes
+ref table yesterday
+
+ref cultureInfo en-PH
+

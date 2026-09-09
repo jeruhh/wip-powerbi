@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# Power BI project (PBIP) artifacts
+# ---------------------------------------------------------------------------
+
+# Local-only editor state. localSettings.json carries workspace/dataset GUIDs
+# and an encrypted credential-binding signature -- never commit it.
+**/.pbi/localSettings.json
+**/.pbi/editorSettings.json
+
+# Model data cache. Large, binary, and holds a materialised copy of whatever
+# was last refreshed -- which may be real data. Never commit it.
+**/.pbi/cache.abf
+**/*.abf
+
+# Binary Power BI files. This repo is intentionally PBIP (plain-text TMDL +
+# PBIR) so the model and report are reviewable and diffable.
+*.pbix
+*.pbit
+
+# Power BI / Power Query temp + recovery
+**/AutoRecovery/
+*.pbiviz
+mashup.pq
+
+# ---------------------------------------------------------------------------
+# Working files
+# ---------------------------------------------------------------------------
+Backup/
+*.bak
+*.tmp
+~$*
+*.xlsx#
+.~lock.*
+
+# Python (synthetic data generator)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# OS / editor cruft
+# ---------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.vscode/
+.idea/
+*.swp

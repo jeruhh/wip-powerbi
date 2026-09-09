@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "e4591fc581ac2e1c00c0",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 2000,
+    "height": 720.15503875968989,
+    "width": 1280,
+    "tabOrder": 1000
+  },
+  "visualGroup": {
+    "displayName": "Overlays",
+    "groupMode": "ScaleMode"
+  }
+}

@@ -1,0 +1,271 @@
+table fact_activities
+	lineageTag: ce5f9c8f-daec-4f62-a0f9-922256df3c7e
+
+	column createdAt
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: Columns
+		lineageTag: a5aacd59-d2df-442a-97db-ac67323ee42a
+		summarizeBy: none
+		sourceColumn: createdAt
+
+		annotation SummarizationSetBy = Automatic
+
+	column updatedAt
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: Columns
+		lineageTag: 988a011b-9775-4b1f-9a55-b542750bf1e5
+		summarizeBy: none
+		sourceColumn: updatedAt
+
+		annotation SummarizationSetBy = Automatic
+
+	column userName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 56700f85-383b-4095-b1ff-2431572346b6
+		summarizeBy: none
+		sourceColumn: userName
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 6fc622ce-d8aa-416c-b379-2bf19df2b0d3
+		summarizeBy: none
+		sourceColumn: clientName
+
+		annotation SummarizationSetBy = Automatic
+
+	column deliverableName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: d33d84f3-476a-4670-8cec-5fc9230bb8b8
+		summarizeBy: none
+		sourceColumn: deliverableName
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Short Date
+		displayFolder: Columns
+		lineageTag: 2e982614-0139-462d-ab47-afe33bbca207
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column startTime
+		dataType: dateTime
+		formatString: Long Time
+		displayFolder: Columns
+		lineageTag: 7b79a5c0-313c-4bf1-950a-b047ada5dbbb
+		summarizeBy: none
+		sourceColumn: startTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column endTime
+		dataType: dateTime
+		formatString: Long Time
+		displayFolder: Columns
+		lineageTag: cf9a23dd-a552-4e45-a2c9-10acffc90804
+		summarizeBy: none
+		sourceColumn: endTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column isOT
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Columns
+		lineageTag: ed2491e4-3323-4186-ab84-81041bf2690e
+		summarizeBy: none
+		sourceColumn: isOT
+
+		annotation SummarizationSetBy = Automatic
+
+	column leaveHours
+		dataType: double
+		displayFolder: Columns
+		lineageTag: 71e19e80-1979-4438-9065-27b73c390f0c
+		summarizeBy: sum
+		sourceColumn: leaveHours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column userId
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 26beb304-0931-4a06-b4ff-3961c1b58d9e
+		summarizeBy: none
+		sourceColumn: userId
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 6dd007ea-6507-4fe2-bcce-2eb0688d49d3
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column hours
+		dataType: double
+		displayFolder: Columns
+		lineageTag: 301e5036-9b54-4ffe-9ed0-b94074f2d3ec
+		summarizeBy: sum
+		sourceColumn: hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cleanLogName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 460d7355-4c62-4494-b895-99513615ff10
+		summarizeBy: none
+		sourceColumn: cleanLogName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Xero Name'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: b975e838-55e3-4523-9ec3-e4d1be530f3a
+		summarizeBy: none
+		sourceColumn: Xero Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category for Productivity Page' = ```
+			
+			VAR SLA_Category =
+			    SWITCH (
+			        TRUE(),
+			        'fact_activities'[SLA] = "Operations", "Operations",
+			        'fact_activities'[SLA] = "Admin", "Admin",
+			        'fact_activities'[SLA] = "Workforce Experience", "Workforce Experience",
+			        "Net Billable Hours"   // default
+			    )
+			RETURN
+			    SWITCH (
+			        TRUE(),
+			        'fact_activities'[tcRef] = "ADMIN - BREAK", "Break",
+			        'fact_activities'[tcRef] = "UNCHARGEABLE HRS", "Unchargeable Hours",
+			        'fact_activities'[tcRef] IN { "LEAVE", "SICK LEAVE" }, "Leave",
+			        SLA_Category   // fallback to SLA result
+			    )
+			
+			```
+		displayFolder: Calculated Columns
+		lineageTag: ea260f1f-e2e0-4334-b0a2-734b9e714490
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column history
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 987a6201-61f9-41d0-af03-d77999ec80d6
+		summarizeBy: none
+		sourceColumn: history
+
+		annotation SummarizationSetBy = Automatic
+
+	column teamName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: b473c6cc-8292-45ca-8489-fc4bb8196259
+		summarizeBy: none
+		sourceColumn: teamName
+
+		annotation SummarizationSetBy = Automatic
+
+	column holidayType
+		dataType: string
+		displayFolder: Columns
+		lineageTag: f5d173aa-872a-4927-849d-2a26cb8dbd7e
+		summarizeBy: none
+		sourceColumn: holidayType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ColumnsMatch = 'fact_activities'[teamName] = 'fact_activities'[teamName]
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Calculated Columns
+		lineageTag: 675c5fc3-7c00-44c6-9a24-5fd655abcb51
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column stlName
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 077932fc-53da-42d3-9c6a-f7d4bb883c0f
+		summarizeBy: none
+		sourceColumn: stlName
+
+		annotation SummarizationSetBy = Automatic
+
+	column remarks
+		dataType: string
+		displayFolder: Columns
+		lineageTag: b15f22cc-c161-4c3f-a5bd-2a4395ace7e9
+		summarizeBy: none
+		sourceColumn: remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column tcRef
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 6fcf0667-1d6e-411a-9677-ae0d6c2f6c5b
+		summarizeBy: none
+		sourceColumn: tcRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column logName = fact_activities[clientName] & " - " & fact_activities[deliverableName]
+		displayFolder: Calculated Columns
+		lineageTag: 46e88ba4-8961-473d-8729-e46f34cc3dde
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_activities = m
+		mode: import
+		queryGroup: Fact
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SyntheticDataPath), null, true),
+				    Data = Source{[Item="fact_activities",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    ParsedTimes = Table.TransformColumns(Promoted, {
+				        {"startTime", each try DateTime.From(Time.FromText(Text.From(_), [Culture="en-US"])) otherwise null},
+				        {"endTime", each try DateTime.From(Time.FromText(Text.From(_), [Culture="en-US"])) otherwise null}
+				    }),
+				    Typed = Table.TransformColumnTypes(ParsedTimes, {
+				        {"createdAt", type datetime}, {"updatedAt", type datetime}, {"userId", type text},
+				        {"teamName", type text}, {"stlName", type text}, {"userName", type text},
+				        {"tcRef", type text}, {"clientName", type text}, {"deliverableName", type text},
+				        {"sla", type text}, {"date", type datetime}, {"startTime", type datetime},
+				        {"endTime", type datetime}, {"history", type text}, {"holidayType", type text},
+				        {"isOT", type logical}, {"remarks", type text}, {"Xero Name", type text},
+				        {"leaveHours", type number}, {"hours", type number}, {"cleanLogName", type text}
+				    })
+				in
+				    Typed
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

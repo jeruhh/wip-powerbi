@@ -1,0 +1,768 @@
+table _Measures
+	lineageTag: bf263560-60d7-4f83-935f-361b77c573c1
+
+	measure 'Billable Hrs' =
+			
+			CALCULATE(
+			    [Duration (Hrs)],
+			    DATESBETWEEN(
+			        'dim_date'[Date],
+			        DATE(2025, 1, 1),
+			        [Yesterday]
+			    ),
+			    FILTER(
+			        'fact_activities',
+			        'fact_activities'[sla] <> "Admin" &&
+			        'fact_activities'[sla] <> "Operations" &&
+			        'fact_activities'[sla] <> "Workforce Experience" &&
+			        'fact_activities'[sla] <> "AP Automation" &&
+			        'fact_activities'[sla] <> "Automation" &&
+			        'fact_activities'[deliverableName] <> "HOLIDAY" &&
+			
+			        //Special Cases
+			        'fact_activities'[teamName] <> "ADMIN" //check this
+			    )
+			)
+		displayFolder: [1] Hours
+		lineageTag: b1fdc2cb-b993-4950-a360-50c0aa1442b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Xero Rev Per Team' = ```
+			
+			// VAR CurrentTeamHours = 
+			//     CALCULATE(
+			//         [Billable Hrs]
+			//         // Keep the 'TEAM' filter active for the numerator
+			//         // REMOVEFILTERS('fact_activities') 
+			//     )
+			
+			// VAR TotalClientHours = 
+			//     CALCULATE(
+			//         [Billable Hrs],
+			//         // 1. Remove Team filter so the denominator represents ALL teams
+			//         REMOVEFILTERS('fact_activities'[teamName])
+			//     )
+			
+			// VAR TotalClientRevenue = 
+			//     CALCULATE(
+			//         SUM('fact_client_data'[Xero Revenue]),
+			//         // CRITICAL FIX: Ensure the Revenue ignores the Team slicer selection
+			//         REMOVEFILTERS('fact_activities'[teamName])
+			//     )
+			
+			// VAR AllocatedRevenue = 
+			//     DIVIDE(CurrentTeamHours, TotalClientHours, 0) * TotalClientRevenue
+			
+			// RETURN
+			//     IF(
+			//         // Condition: Are there ZERO hours across the entire company?
+			//         ISBLANK(TotalClientHours) || TotalClientHours = 0,
+			        
+			//         // If true, check if we are on an individual team row
+			//         IF(
+			//             ISINSCOPE('fact_activities'[teamName]), 
+			//             BLANK(),             // Hide it for individual teams so they don't duplicate
+			//             TotalClientRevenue   // Show the full revenue in the Total rows
+			//         ),
+			        
+			//         // Condition False: Hours exist, so allocate normally
+			//         AllocatedRevenue
+			//     )
+			
+			//------------------------------------------------------------------------------------------------------------------------------------
+			VAR CurrentTeamHours = 
+			    CALCULATE(
+			        [Billable Hrs]
+			        // Keep the 'TEAM' filter active for the numerator
+			    )
+			
+			VAR TotalClientHours = 
+			    CALCULATE(
+			        [Billable Hrs],
+			        REMOVEFILTERS('fact_activities'[teamName])
+			    )
+			
+			VAR TotalClientRevenue = 
+			    CALCULATE(
+			        SUM('fact_client_data'[Xero Revenue]),
+			        REMOVEFILTERS('fact_activities'[teamName])
+			    )
+			
+			VAR AllocatedRevenue = 
+			    DIVIDE(CurrentTeamHours, TotalClientHours, 0) * TotalClientRevenue
+			
+			RETURN
+			    IF(
+			        // teamName is filtered (any source) AND that filter yields no billable hours -> blank
+			        ISFILTERED('fact_activities'[teamName]) && (ISBLANK(CurrentTeamHours) || CurrentTeamHours = 0),
+			        BLANK(),
+			
+			        IF(
+			            ISBLANK(TotalClientHours) || TotalClientHours = 0,
+			            IF(
+			                ISFILTERED('fact_activities'[teamName]), 
+			                BLANK(),
+			                TotalClientRevenue
+			            ),
+			            AllocatedRevenue
+			        )
+			    )
+			
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: [2] Revenue
+		lineageTag: a975c347-0f8d-46c8-aaab-777b63621436
+
+	measure 'Show Filters' =
+			
+			----DATE FILTERS----
+			--Month Tag Fiscal Year
+			IF(
+			    ISFILTERED('Dim_Date'[Month Tag]),
+			    VAR SelectedMonths = VALUES('Dim_Date'[Fiscal Year])
+			    VAR itemsCombined = CONCATENATEX(SelectedMonths, 'Dim_Date'[Fiscal Year], ", ")
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Month Tag Month
+			IF(
+			    ISFILTERED('Dim_Date'[Month Tag]),
+			    VAR SelectedMonths = VALUES('Dim_Date'[Month Name])
+			    VAR itemsCombined = CONCATENATEX(SelectedMonths, 'Dim_Date'[Month Name], ", ")
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			
+			--Fiscal Year
+			IF(
+			    ISFILTERED('Dim_Date'[Fiscal Year]),
+			    VAR items = VALUES('Dim_Date'[Fiscal Year])
+			    VAR itemsCombined = CONCATENATEX(items, 'Dim_Date'[Fiscal Year], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Month
+			IF(
+			    ISFILTERED('Dim_Date'[Month Name]),
+			    VAR items = VALUES('Dim_Date'[Month Name])
+			    VAR itemsCombined = CONCATENATEX(items, 'Dim_Date'[Month Name], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			
+			----OTHER FILTERS----
+			--Principal
+			IF(
+			    ISFILTERED('dim_clients'[Principal*]),
+			    VAR items = VALUES('dim_clients'[Principal*])
+			    VAR itemsCombined = CONCATENATEX(items, 'dim_clients'[Principal*], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Business Stream
+			IF(
+			    ISFILTERED('dim_clients'[Business Stream*]),
+			    VAR items = VALUES('dim_clients'[Business Stream*])
+			    VAR itemsCombined = CONCATENATEX(items, 'dim_clients'[Business Stream*], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Client Group
+			IF(
+			    ISFILTERED('dim_clients'[Client Group]),
+			    VAR items = VALUES('dim_clients'[Client Group])
+			    VAR itemsCombined = CONCATENATEX(items, 'dim_clients'[Client Group], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Client
+			IF(
+			    ISFILTERED('dim_clients'[Xero Name*]),
+			    VAR items = VALUES('dim_clients'[Xero Name*])
+			    VAR itemsCombined = CONCATENATEX(items, 'dim_clients'[Xero Name*], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Operational Delivery
+			IF(
+			    ISFILTERED('fact_activities'[teamName]),
+			    VAR items = VALUES('fact_activities'[teamName])
+			    VAR itemsCombined = CONCATENATEX(items, 'fact_activities'[teamName], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Employee
+			IF(
+			    ISFILTERED('fact_activities'[userName]),
+			    VAR items = VALUES('fact_activities'[userName])
+			    VAR itemsCombined = CONCATENATEX(items, 'fact_activities'[userName], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--SLA
+			IF(
+			    ISFILTERED('fact_activities'[sla]),
+			    VAR items = VALUES('fact_activities'[sla])
+			    VAR itemsCombined = CONCATENATEX(items, 'fact_activities'[sla], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)&
+			--Deliverable
+			IF(
+			    ISFILTERED('fact_activities'[deliverableName]),
+			    VAR items = VALUES('fact_activities'[deliverableName])
+			    VAR itemsCombined = CONCATENATEX(items, 'fact_activities'[deliverableName], UNICHAR(10))
+			    RETURN itemsCombined & UNICHAR(10)
+			)
+		displayFolder: [9] Others
+		lineageTag: 52d3ffb4-d280-457d-afed-eea6272aa3f2
+
+	measure 'Show Filters Header' =
+			
+			----DATE FILTERS----
+			--Fiscal Year
+			IF(
+			    ISFILTERED('Dim_Date'[Fiscal Year])  || ISFILTERED('Dim_Date'[Month Tag]),
+			    "Fiscal Year: " & REPT(UNICHAR(10), COUNTROWS(VALUES('Dim_Date'[Fiscal Year])))
+			)&
+			--Month
+			IF(
+			    ISFILTERED('Dim_Date'[Month Name]) || ISFILTERED('Dim_Date'[Month Tag]),
+			    "Month: " & REPT(UNICHAR(10), COUNTROWS(VALUES('Dim_Date'[Month Name])))
+			)&
+			
+			----OTHER FILTERS----
+			--Principal
+			IF(
+			    ISFILTERED('dim_clients'[Principal*]),
+			    "Principal: " & REPT(UNICHAR(10), COUNTROWS(VALUES('dim_clients'[Principal*])))
+			)&
+			--Business Stream
+			IF(
+			    ISFILTERED('dim_clients'[Business Stream*]),
+			    "Business Stream: " & REPT(UNICHAR(10), COUNTROWS(VALUES('dim_clients'[Business Stream*])))
+			)&
+			--Client Group
+			IF(
+			    ISFILTERED('dim_clients'[Client Group]),
+			    "Client Group: " & REPT(UNICHAR(10), COUNTROWS(VALUES('dim_clients'[Client Group])))
+			)&
+			--Client
+			IF(
+			    ISFILTERED('dim_clients'[Xero Name*]),
+			    "Client: " & REPT(UNICHAR(10), COUNTROWS(VALUES('dim_clients'[Xero Name*])))
+			)&
+			--Operational Delivery
+			IF(
+			    ISFILTERED('fact_activities'[teamName]),
+			    "Operational Delivery: " & REPT(UNICHAR(10), COUNTROWS(VALUES('fact_activities'[teamName])))
+			)&
+			--Employee
+			IF(
+			    ISFILTERED('fact_activities'[userName]),
+			    "Employee: " & REPT(UNICHAR(10), COUNTROWS(VALUES('fact_activities'[userName])))
+			)&
+			--SLA
+			IF(
+			    ISFILTERED('fact_activities'[sla]),
+			    "SLA: " & REPT(UNICHAR(10), COUNTROWS(VALUES('fact_activities'[sla])))
+			)&
+			--Deliverable
+			IF(
+			    ISFILTERED('fact_activities'[deliverableName]),
+			    "Deliverable: " & REPT(UNICHAR(10), COUNTROWS(VALUES('fact_activities'[deliverableName])))
+			)
+		displayFolder: [9] Others
+		lineageTag: 175ff249-eebc-4c99-a21b-6f82df8034ac
+
+	measure 'Std vs Billable Hrs' =
+			
+			VAR stdHrs = [Std Hrs]
+			VAR billableHrs = [Billable Hrs]
+			
+			RETURN
+			stdHrs - billableHrs
+		formatString: #,0.00
+		displayFolder: [1] Hours
+		lineageTag: 06721ff6-26ef-4322-910b-7d7b3e5c00da
+
+	measure 'Blank Column' = BLANK()
+		formatString: 0
+		displayFolder: [9] Others
+		lineageTag: 96b7ceca-4495-416f-9b85-e053e545151f
+
+	measure 'Xero vs Fct Rev' =
+			
+			VAR fctRev = SUM('fact_client_data'[Forecasted Revenue])
+			VAR xeroRev = [Xero Rev Per Team]
+			
+			RETURN
+			xeroRev - fctRev
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: [2] Revenue
+		lineageTag: dc990557-e2fc-4476-938c-ecf6d689a3c3
+
+	measure 'Actual Hrs' =
+			
+			CALCULATE(
+			    [Duration (Hrs)],
+			    DATESBETWEEN(
+			        'dim_date'[Date],
+			        DATE(2025, 1, 1),
+			        [Yesterday]
+			    ),
+			    FILTER(
+			        'fact_activities',
+			        'fact_activities'[tcRef] <> "ADMIN - LUNCH" && 'fact_activities'[deliverableName] <> "LUNCH" &&
+			        'fact_activities'[tcRef] <> "Unchargeable Hrs" &&
+			        'fact_activities'[deliverableName] <> "TIME IN AND OUT" &&
+			        'fact_activities'[teamName] <> "ADMIN" //check this
+			    )
+			)
+		displayFolder: [1] Hours
+		lineageTag: 3d66a518-831f-40f2-8ad9-e02a98c67204
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Billable Hrs %' =
+			
+			DIVIDE([Billable Hrs], [Actual Hrs], BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: [1] Hours
+		lineageTag: 60e90033-9a1f-479c-b72f-8a3f99c73039
+
+	measure Rev/Hr =
+			
+			[Xero Rev Per Team]/[Billable Hrs]
+		displayFolder: [2] Revenue
+		lineageTag: bfd0223b-6408-4d8d-814a-0903b0ae9906
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current Month (Billable Hrs)' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- If the selected range equals the full calendar, we consider it "no date filter"
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate), 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, 0 )
+			
+			RETURN
+			CALCULATE(
+			    [Billable Hrs],
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 424f28e7-58ce-4891-a8d5-a1380657b94e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Previous Month (Billable Hrs)' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- Check if a real filter exists
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			-- Shift AnchorDate back one month
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate) - 1, 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, -1 )
+			
+			RETURN
+			CALCULATE(
+			    [Billable Hrs],
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 193bfea3-44cf-4d75-8153-b27c65b1bd0c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current vs Previous Month (Billable Hrs)' =
+			
+			[Current Month (Billable Hrs)] - [Previous Month (Billable Hrs)]
+		displayFolder: [3] Time Details Analysis
+		lineageTag: ac256ec0-b5ff-4972-8e1a-41052d64ba1d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current vs Previous Month (Billable Hrs %)' = ```
+			
+			VAR quotient =
+			DIVIDE(
+			    [Current Month (Billable Hrs)],
+			    [Previous Month (Billable Hrs)],
+			    BLANK()
+			)
+			RETURN
+			IF(
+			    NOT ISBLANK([Current vs Previous Month (Billable Hrs)]),
+			    quotient - 1, 
+			    BLANK()
+			)
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: [3] Time Details Analysis
+		lineageTag: b2554ff2-cd98-4735-b57b-0d241b3734da
+
+	measure 'Current Month (Std Hrs)' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- Detect if a real selection exists
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate), 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, 0 )
+			
+			RETURN
+			CALCULATE(
+			    [Std Hrs],
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 44db3e17-48aa-4d14-9943-d343135c1f53
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current Month (Billable vs Std Hrs)' = ```
+			
+			VAR billableHrs = [Current Month (Billable Hrs)]
+			VAR standardHrs = [Current Month (Std Hrs)]
+			RETURN
+			standardHrs - billableHrs 
+			```
+		displayFolder: [3] Time Details Analysis
+		lineageTag: db027dfe-c9b8-47e8-b0d6-5a0c7006fa4f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current Month (Actual Hrs)' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- If selected range = full calendar, then "no filter"
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate), 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, 0 )
+			
+			RETURN
+			CALCULATE(
+			    [Actual Hrs],
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 702eae2d-3b35-4bbb-b014-f83307b64527
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current Month (Non Billable Hrs)' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- If selected range = full calendar, then "no filter"
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate), 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, 0 )
+			
+			RETURN
+			CALCULATE(
+			    [Non Billable Hrs],
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 64bdcf56-66ff-43e3-985b-290ae4ea601b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Non Billable Hrs' =
+			
+			CALCULATE(
+			    [Duration (Hrs)],
+			    DATESBETWEEN(
+			        'dim_date'[Date],
+			        DATE(2025, 1, 1),
+			        [Yesterday]
+			    ),
+			    FILTER(
+			        'fact_activities',
+			        'fact_activities'[sla] = "Admin" ||
+			        'fact_activities'[sla] = "Operations" ||
+			        'fact_activities'[sla] = "Workforce Experience" ||
+			        'fact_activities'[sla] = "AP Automation" ||
+			        'fact_activities'[deliverableName] = "HOLIDAY"
+			    ),
+			     FILTER(
+			        'fact_activities',
+			        'fact_activities'[tcRef] <> "Unchargeable Hrs" &&
+			        'fact_activities'[tcRef] <> "ADMIN - LUNCH" && 'fact_activities'[deliverableName] <> "LUNCH" &&
+			        'fact_activities'[deliverableName] <> "TIME IN AND OUT" &&
+			        'fact_activities'[teamName] <> "ADMIN" //check this
+			    )
+			)
+		displayFolder: [1] Hours
+		lineageTag: 99e6bf14-dc7d-403b-8229-f3493753052c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Current Month (Billable Hrs Copy)' =
+			
+			[Current Month (Billable Hrs)]
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 2ddc522f-d202-48fb-a07e-9b017ea48dc5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TDA Title' =
+			
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- Check if a real filter exists
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			RETURN
+			"TDA (" &
+			    FORMAT( AnchorDate, "MMMM YYYY") &
+			")"
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 198e3168-a2e4-47b1-8435-03fcf2032e92
+
+	measure 'Current Month (Productivity Rate)' =
+			
+			[Current Month (Billable Hrs)] / [Current Month (Actual Hrs - Excl. Break)]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: [3] Time Details Analysis
+		lineageTag: a5101009-41ae-4af9-a19c-249c4c49128a
+
+	measure 'Current Month (Actual Hrs - Excl. Break)' =
+			
+			//Exclude break and unchargeable hours
+			VAR MinSel =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MaxSel =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALLSELECTED('Dim_Date') )
+			VAR MinAll =
+			    CALCULATE( MIN('Dim_Date'[Date]), ALL('Dim_Date') )
+			VAR MaxAll =
+			    CALCULATE( MAX('Dim_Date'[Date]), ALL('Dim_Date') )
+			
+			-- If the selected range equals the full calendar, treat it as "no filter"
+			VAR HasDateSelection =
+			    NOT ( MinSel = MinAll && MaxSel = MaxAll )
+			
+			VAR AnchorDate =
+			    IF( HasDateSelection, MinSel, TODAY() )
+			
+			VAR StartDate =
+			    DATE( YEAR(AnchorDate), MONTH(AnchorDate), 1 )
+			
+			VAR EndDate =
+			    EOMONTH( AnchorDate, 0 )
+			
+			RETURN
+			CALCULATE(
+			    [Actual Hrs (excl Break)],
+			    // FILTER(
+			    //     'fact_activities',
+			    //     'fact_activities'[TCRef] <> "ADMIN - Break"
+			    // ),
+			    DATESBETWEEN('Dim_Date'[Date], StartDate, EndDate)
+			)
+		displayFolder: [3] Time Details Analysis
+		lineageTag: 143b77e4-b974-4184-8134-7cc536269f9c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Std Hrs' = SUM('fact_client_data'[Standard Hours])
+		displayFolder: [1] Hours
+		lineageTag: a7f18e9a-d9e9-4f5e-97a2-6c449a5ac21d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Release Notes Title' = ```
+			
+			"Release Notes — " & 
+			FORMAT(SELECTEDVALUE('release_notes'[Date]), "mmmm, dd, yyyy")
+			
+			```
+		displayFolder: [9] Others
+		lineageTag: 46512a76-80eb-49b8-b446-937ee63c2f11
+
+	measure 'Actual Hrs (excl Break)' =
+			
+			CALCULATE(
+			    [Duration (Hrs)],
+			    DATESBETWEEN(
+			        'dim_date'[Date],
+			        DATE(2025, 1, 1),
+			        [Yesterday]
+			    ),
+			    FILTER(
+			        'fact_activities',
+			        'fact_activities'[tcRef] <> "Unchargeable Hrs" &&
+			        'fact_activities'[tcRef] <> "ADMIN - Break" &&
+			        'fact_activities'[tcRef] <> "ADMIN - LUNCH" && 'fact_activities'[deliverableName] <> "LUNCH" &&
+			        'fact_activities'[teamName] <> "ADMIN" //check this
+			    )
+			)
+		displayFolder: [1] Hours
+		lineageTag: 5fd6b510-c4d1-413e-ad7a-a58ae8458581
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Productivity Rate' =
+			
+			VAR netBillableHrs = [Billable Hrs]
+			VAR actualHrs = [Actual Hrs (excl Break)]
+			VAR actualHrsYTD =
+			    CALCULATE(
+			        [Actual Hrs],
+			        REMOVEFILTERS('Dim_Date')
+			    )
+			RETURN
+			    netBillableHrs / actualHrs
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: [9] Others
+		lineageTag: ebc1e921-d08c-41d1-b71c-70835b808777
+
+	measure 'Duration (Hrs)' =
+			
+			SUMX(
+			    fact_activities,
+			    IF(
+			        ISBLANK(fact_activities[leaveHours]),
+			        -- Calculate time difference and handle midnight crossing
+			        IF(
+			            ISBLANK(fact_activities[hours]),
+			            MOD(fact_activities[endTime] - fact_activities[startTime], 1) * 24,
+			            fact_activities[hours]
+			        ),
+			        fact_activities[leaveHours]
+			    )
+			)
+		displayFolder: [1] Hours
+		lineageTag: 3abff3f3-cc0d-4228-8cff-19358f0ff8ea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Excess/Requirement =
+			
+			[Actual Hrs] - [Std Hrs]
+		displayFolder: [1] Hours
+		lineageTag: 69169525-f18c-4915-9cea-d6f0a080ba39
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Yesterday =
+			
+			VAR LocalNow = NOW() + TIME(10, 0, 0)
+			// INT() strips the time away, leaving just the Date at midnight.
+			// Subtracting 1 moves it back exactly 24 hours to Yesterday's date.
+			VAR YesterdayDate = INT(LocalNow) - 1
+			RETURN
+			    YesterdayDate + TIME(23, 59, 0)
+		formatString: General Date
+		displayFolder: [9] Others
+		lineageTag: 8045e5c3-c61b-494f-b6da-5226f7f2c820
+
+	column Value
+		formatString: 0
+		displayFolder: _
+		lineageTag: 4beecf98-05a5-4c19-8aa1-8b21b6271c51
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column1
+		formatString: 0
+		displayFolder: _
+		lineageTag: 1cbc7266-9702-4200-8512-5877f79a0468
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column1]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = FILTER( ADDCOLUMNS({0}, "Column1", BLANK()), FALSE )
+
+	annotation PBI_Id = e46271a1c47c436aabb471203b724035
+

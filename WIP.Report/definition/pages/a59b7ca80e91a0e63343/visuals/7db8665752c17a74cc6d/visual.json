@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "7db8665752c17a74cc6d",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 3000,
+    "height": 720,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visualGroup": {
+    "displayName": "Ruler",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "adc792b82c29a03906aa",
+  "isHidden": true
+}

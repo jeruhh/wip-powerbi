@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "87ae716050da7ca2e583",
+  "position": {
+    "x": 0.57142857142858361,
+    "y": 30.182674772036489,
+    "z": 3001,
+    "height": 468.66565349544072,
+    "width": 1149.4285714285716,
+    "tabOrder": 2000
+  },
+  "visualGroup": {
+    "displayName": "Top 5 Clients",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "c8bcec2776e2489820ac"
+}

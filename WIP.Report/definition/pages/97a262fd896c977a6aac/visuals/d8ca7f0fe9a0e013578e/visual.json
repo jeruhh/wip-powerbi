@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "d8ca7f0fe9a0e013578e",
+  "position": {
+    "x": 0,
+    "y": 29.727659574468085,
+    "z": 1500,
+    "height": 468.66565349544072,
+    "width": 1149,
+    "tabOrder": 0
+  },
+  "visualGroup": {
+    "displayName": "Bottom 10 Clients",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "c8bcec2776e2489820ac",
+  "isHidden": true
+}

@@ -1,0 +1,162 @@
+table dim_clients
+	lineageTag: 83412cb1-00e8-4704-a073-063d38a3654a
+
+	column 'Source.Name'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 7a168977-3dfb-46a8-af06-345e35665dfa
+		summarizeBy: none
+		sourceColumn: Source.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Group'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 743fb1c2-7408-4108-b3c1-31e3040f94f6
+		summarizeBy: none
+		sourceColumn: Client Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		displayFolder: Columns
+		lineageTag: ca2dcae1-a5ea-414d-8bd0-3e0437bda66b
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		displayFolder: Columns
+		lineageTag: e9c75cfc-6d72-4cc9-8a13-bf58905e48ce
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FTE Count/Rate'
+		dataType: double
+		displayFolder: Columns
+		lineageTag: 6b07a86b-4dab-4504-90c3-25a2d88500a0
+		summarizeBy: sum
+		sourceColumn: FTE Count/Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Remarks
+		dataType: string
+		displayFolder: Columns
+		lineageTag: a0c72376-3bd9-46a5-85e0-6e8441ee5e81
+		summarizeBy: none
+		sourceColumn: Remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column tcref_bs_id
+		dataType: string
+		displayFolder: Columns
+		lineageTag: cf9a8d42-1c69-428a-8854-79b3e6a8a118
+		summarizeBy: none
+		sourceColumn: tcref_bs_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TC Reference*'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 24d07ec7-6101-463c-b57f-48e2a237aebc
+		summarizeBy: none
+		sourceColumn: TC Reference*
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Xero Name*'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 81232cb6-9814-4ee8-8b94-d7436dff64db
+		summarizeBy: none
+		sourceColumn: Xero Name*
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Stream*'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: dd9cd3dd-8c81-42a6-9efe-4a10b72c26f7
+		summarizeBy: none
+		sourceColumn: Business Stream*
+
+		annotation SummarizationSetBy = Automatic
+
+	column Principal*
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 023d35d4-5de9-4ab4-a0ca-b120c82c5edf
+		summarizeBy: none
+		sourceColumn: Principal*
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned Team Lead*'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 075988fe-f31d-47bc-b6dd-1e7fabd09c44
+		summarizeBy: none
+		sourceColumn: Assigned Team Lead*
+
+		annotation SummarizationSetBy = Automatic
+
+	column Responsible*
+		dataType: string
+		displayFolder: Columns
+		lineageTag: e097096c-b8a7-4815-9991-1b6f63e51df4
+		summarizeBy: none
+		sourceColumn: Responsible*
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Added'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 4b3ea0ae-a205-45e0-895f-bad2ccc93cd4
+		summarizeBy: none
+		sourceColumn: Date Added
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Added By'
+		dataType: string
+		displayFolder: Columns
+		lineageTag: 9d94dd45-e534-421c-87ca-47849e9d9c0a
+		summarizeBy: none
+		sourceColumn: Added By
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_clients = m
+		mode: import
+		queryGroup: Dimension
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SyntheticDataPath), null, true),
+				    Data = Source{[Item="dim_clients",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {
+				        {"Source.Name", type text}, {"TC Reference*", type text}, {"Xero Name*", type text},
+				        {"Business Stream*", type text}, {"Principal*", type text}, {"Assigned Team Lead*", type text},
+				        {"Responsible*", type text}, {"Client Group", type text}, {"Status", type text},
+				        {"Type", type text}, {"FTE Count/Rate", type number}, {"Remarks", type text},
+				        {"Date Added", type text}, {"Added By", type text}, {"tcref_bs_id", type text}
+				    })
+				in
+				    Typed
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
